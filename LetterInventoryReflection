@@ -1,0 +1,45 @@
+Assessment 1: LetterInventory Reflection
+
+1) What did you learn from working on this 
+assignment?
+
+I learned about proper coding style conventions,
+such as line length, documentation through
+comments, and what Java coding habits I should avoid 
+(by referencing the CSE143 code quality guide).
+
+2) What did you struggle most with on this 
+assignment? How did you work to overcome 
+that struggle (even if you weren't able to)?
+
+I struggled most with having to unlearn previous
+coding habits I picked up, some of which were
+disallowed according to the UW CSE143 code-quality
+guide, such as using return on void methods. As
+such I had to consciously recognize unconscious bad habits.
+Another bad habit I am unlearning is insufficient code 
+documentation, as I had to write comments to document the
+behaviour and results of the functions of the LetterInventory
+class.
+
+3) How will you use what you learned from 
+this assignment to improve your process or 
+approach on future assignments?
+
+I will be more conscious of bad coding conventions I make
+and make efforts to avoid them. I will also proactively
+leave helpful comments on my code to aid others in
+understanding how my code works.
+
+4) Was any part of the specification or 
+requirements unclear? If so, what part(s), 
+and how could it have been made clearer?
+
+No parts of the specification or requirements were
+unclear. 
+
+5) About how many hours did you spend working 
+on this assignment? (Estimates are fine, but 
+try to get close)
+
+I spent about 1 hour working on this assignment.
