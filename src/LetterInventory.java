@@ -65,7 +65,8 @@ public class LetterInventory
 
         if (index < 0 || index > 25)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical" + " (a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical" + 
+                " (a-z), case insensitive.");
         }
 
         return letterCount[index];
@@ -90,12 +91,14 @@ public class LetterInventory
 
         if (index < 0 || index > 25)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical " + "(a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical " 
+                + "(a-z), case insensitive.");
         }
 
         if (value < 0)
         {
-            throw new IllegalArgumentException(String.format("Count for char '%c' " + "cannot be negative.", letter));
+            throw new IllegalArgumentException(String.format("Count for char '%c' " 
+                + "cannot be negative.", letter));
         }
 
         size += value - letterCount[index];
