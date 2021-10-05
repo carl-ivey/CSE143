@@ -1,9 +1,9 @@
 /**
- * Name: LetterInventory.java
+ * Name: LetterInventory.java 
  * TA: Kashish Aggarval
  * 
- * This class is instantiated to store the counts of 
- * alphabetical characters in a given String in the constructor.
+ * Stores the counts of alphabetical characters in a given String provided as a
+ * constructor argument.
  * 
  * @author Victor Du
  */
@@ -62,13 +62,12 @@ public class LetterInventory
     public int get(char letter)
     {
         int index = Character.toLowerCase(letter) - 'a';
-        
+
         if (index < 0 || index > 25)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical"
-                + " (a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical" + " (a-z), case insensitive.");
         }
-        
+
         return letterCount[index];
     }
 
@@ -88,19 +87,17 @@ public class LetterInventory
     public void set(char letter, int value)
     {
         int index = Character.toLowerCase(letter) - 'a';
-        
+
         if (index < 0 || index > 25)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical "
-                + "(a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical " + "(a-z), case insensitive.");
         }
-        
+
         if (value < 0)
         {
-            throw new IllegalArgumentException(String.format("Count for char '%c' "
-                + "cannot be negative.", letter));
+            throw new IllegalArgumentException(String.format("Count for char '%c' " + "cannot be negative.", letter));
         }
-        
+
         size += value - letterCount[index];
         letterCount[index] = value;
     }
@@ -132,7 +129,7 @@ public class LetterInventory
     public String toString()
     {
         String invStr = "";
-        
+
         for (int i = 0; i < letterCount.length; i++)
         {
             char actualChar = (char) ('a' + i);
@@ -141,7 +138,7 @@ public class LetterInventory
                 invStr += actualChar;
             }
         }
-        
+
         return String.format("[%s]", invStr);
     }
 
@@ -159,7 +156,7 @@ public class LetterInventory
         int[] otherInv = other.letterCount;
         int[] invSum = new int[26];
         int newSize = 0;
-        
+
         for (int i = 0; i < 26; i++)
         {
             int newCount = letterCount[i] + otherInv[i];
@@ -191,7 +188,7 @@ public class LetterInventory
         int[] otherInv = other.letterCount;
         int[] invDiff = new int[26];
         int newSize = 0;
-        
+
         for (int i = 0; i < 26; i++)
         {
             int diff = letterCount[i] - otherInv[i];
