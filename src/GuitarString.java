@@ -122,4 +122,13 @@ public class GuitarString
         return ringBuffer.peek();
     }
 
+    /**
+     * Prints a String representation of the displacements in the ring buffer
+     * modelling the guitar string.
+     */
+    public void print()
+    {
+        System.out.println(ringBuffer);
+    }
+
 }
