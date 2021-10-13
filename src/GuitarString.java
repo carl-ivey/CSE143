@@ -1,6 +1,6 @@
-
 /**
- * Name: GuitarString.java TA: Kashish Aggarval
+ * Name: GuitarString.java 
+ * TA: Kashish Aggarval
  * 
  * Models the behavior of a plucked guitar string that is vibrating, given a
  * frequency or a list of displacement values of sequential segments in time of
