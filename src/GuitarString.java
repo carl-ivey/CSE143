@@ -30,7 +30,8 @@ public class GuitarString
     {
         if (frequency <= 0.0)
             throw new IllegalArgumentException(
-                String.format("Frequency must be above zero. (your frequency: %.3f)", frequency));
+                String.format("Frequency must be above zero. "
+                    + "(your frequency: %.3f)", frequency));
 
         int capacity = (int) Math.round((double) StdAudio.SAMPLE_RATE / frequency);
 
@@ -38,7 +39,8 @@ public class GuitarString
         {
             double maxFreq = StdAudio.SAMPLE_RATE / 2.0;
             throw new IllegalArgumentException(
-                String.format("Buffer capacity must be greater than 2. (maximum frequency: %.3f, your frequency: %.3f)",
+                String.format("Buffer capacity must be greater than 2. "
+                    + "(maximum frequency: %.3f, your frequency: %.3f)",
                     maxFreq, frequency));
         }
 
@@ -68,7 +70,9 @@ public class GuitarString
         if (length < 2)
         {
             throw new IllegalArgumentException(String
-                .format("Ring buffer argument must have at least 2 elements. (currently has %d elements)", length));
+                .format("Ring buffer argument must have at least 2"
+                    + " elements. (currently has %d elements)", 
+                    length));
         }
 
         ringBuffer = new LinkedList<>();
