@@ -1,0 +1,39 @@
+Assessment 2: GuitarHero Reflection
+
+1) What did you learn from working on this 
+assignment?
+
+I learned about a particular practical application
+of the queue data structure, that is, the representation
+of a ring buffer used to model the oscillation displacements of a guitar.
+
+2) What did you struggle most with on this 
+assignment? How did you work to overcome 
+that struggle (even if you weren't able to)?
+
+I struggled most with unlearning bad habits when
+coding, as my old coding style of explicitly
+specifying classes to import caused the online judge
+on EdStem to grade my assignment erroneously, and this
+was only resolved when, in accordance with the style guide 
+on the CSE 143 website, I replaced my specific class 
+imports with a wildcard import.
+
+3) How will you use what you learned from 
+this assignment to improve your process or 
+approach on future assignments?
+
+I will pay further attention to my code style and make sure
+it adheres to the CSE 143 style guide guidelines.
+
+4) Was any part of the specification or 
+requirements unclear? If so, what part(s), 
+and how could it have been made clearer?
+
+N/A, the specification itself was sufficiently clear.
+
+5) About how many hours did you spend working 
+on this assignment? (Estimates are fine, but 
+try to get close)
+
+I spent approximately 1-2 hours on the assignment.
