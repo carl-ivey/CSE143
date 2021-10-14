@@ -2,16 +2,36 @@
  * Name: Guitar37.java
  * TA: Kashish Aggarval
  * 
- * Models the behavior of a 37-string guitar by modelling the behavior of its
- * strings, which comprise a frequency range from 110 Hz to 880 Hz, when they
- * are plucked.
+ * Models the behavior of a 37-string guitar by modelling the oscillation
+ * behavior of its strings, which comprise a frequency range from 110 Hz to 880
+ * Hz, when they are plucked.
  * 
  * @author Victor Du
  */
 
 public class Guitar37 implements Guitar
 {
-    public static final String KEYBOARD = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' "; // keyboard layout
+    public static final String KEYBOARD = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' "; // keyboard
+                                                                                   // layout
+
+    public static final int NUM_STRINGS = 37; // number of strings on guitar
+
+    public static final int PITCH_MIN_VALUE = -24; // lowest playable pitch on
+                                                   // guitar
+
+    public static final int PITCH_MAX_VALUE = 12; // highest playable pitch on
+                                                  // guitar
+
+    public static final int CONCERT_A_OFFSET = 24; // the offset that must be
+                                                   // added to the minimum pitch
+                                                   // value so that pitch 0
+                                                   // corresponds to the string
+                                                   // to pluck to play
+                                                   // concert-A.
+
+    private static final double CONCERT_A_FREQ = 440.0; // the frequency for
+                                                        // concert-A tone, Hz.
+
     private GuitarString[] strings;
     private int time;
 
@@ -22,12 +42,13 @@ public class Guitar37 implements Guitar
      */
     public Guitar37()
     {
-        strings = new GuitarString[37];
+        strings = new GuitarString[NUM_STRINGS];
         time = 0;
 
-        for (int i = 0; i < 37; i++)
+        for (int i = 0; i < NUM_STRINGS; i++)
         {
-            double freq = 440.0 * Math.pow(2.0, (i - 24.0) / 12.0);
+            double freq = CONCERT_A_FREQ * 
+                Math.pow(2.0, (i - (double) CONCERT_A_OFFSET) / (double) PITCH_MAX_VALUE);
             strings[i] = new GuitarString(freq);
         }
     }
@@ -43,9 +64,9 @@ public class Guitar37 implements Guitar
      */
     public void playNote(int pitch)
     {
-        if (pitch >= -24 && pitch <= 12)
+        if (pitch >= PITCH_MIN_VALUE && pitch <= PITCH_MAX_VALUE)
         {
-            int strIdx = pitch + 24;
+            int strIdx = pitch + CONCERT_A_OFFSET;
             strings[strIdx].pluck();
         }
     }

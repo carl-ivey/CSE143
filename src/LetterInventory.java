@@ -1,6 +1,5 @@
 /**
- * Name: LetterInventory.java 
- * TA: Kashish Aggarval
+ * Name: LetterInventory.java TA: Kashish Aggarval
  * 
  * Stores the counts of alphabetical characters in a given String provided as a
  * constructor argument.
@@ -12,6 +11,10 @@ public class LetterInventory
     public int[] letterCount;
     public int size;
 
+    public static final int A_LETTER_INDEX = 0;
+    public static final int Z_LETTER_INDEX = 25;
+    public static final int NUM_LETTERS_IN_ALPHABET = 26;
+
     /**
      * Instantiates an instance of LetterInventory, representing an inventory of
      * alphabetical (a-z) characters in the given String data irrespective of
@@ -22,7 +25,7 @@ public class LetterInventory
      */
     public LetterInventory(String data)
     {
-        letterCount = new int[26];
+        letterCount = new int[NUM_LETTERS_IN_ALPHABET];
         size = 0;
 
         if (data != null)
@@ -30,7 +33,7 @@ public class LetterInventory
             for (int i = 0; i < data.length(); i++)
             {
                 int dist = Character.toLowerCase(data.charAt(i)) - 'a';
-                if (dist >= 0 && dist < 26)
+                if (dist >= A_LETTER_INDEX && dist <= Z_LETTER_INDEX)
                 {
                     letterCount[dist]++;
                     size++;
@@ -63,10 +66,9 @@ public class LetterInventory
     {
         int index = Character.toLowerCase(letter) - 'a';
 
-        if (index < 0 || index > 25)
+        if (index < A_LETTER_INDEX || index > Z_LETTER_INDEX)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical" + 
-                " (a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical" + " (a-z), case insensitive.");
         }
 
         return letterCount[index];
@@ -89,16 +91,14 @@ public class LetterInventory
     {
         int index = Character.toLowerCase(letter) - 'a';
 
-        if (index < 0 || index > 25)
+        if (index < A_LETTER_INDEX || index > Z_LETTER_INDEX)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical " 
-                + "(a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical " + "(a-z), case insensitive.");
         }
 
         if (value < 0)
         {
-            throw new IllegalArgumentException(String.format("Count for char '%c' " 
-                + "cannot be negative.", letter));
+            throw new IllegalArgumentException(String.format("Count for char '%c' " + "cannot be negative.", letter));
         }
 
         size += value - letterCount[index];
@@ -128,7 +128,6 @@ public class LetterInventory
      * @return a String representation of all the letters stored in the
      *         LetterInventory instance in sorted order.
      */
-    @Override
     public String toString()
     {
         String invStr = "";
@@ -156,20 +155,13 @@ public class LetterInventory
      */
     public LetterInventory add(LetterInventory other)
     {
-        int[] otherInv = other.letterCount;
-        int[] invSum = new int[26];
-        int newSize = 0;
+        LetterInventory result = new LetterInventory();
 
-        for (int i = 0; i < 26; i++)
+        for (char c = 'a'; c <= 'z'; c++)
         {
-            int newCount = letterCount[i] + otherInv[i];
-            invSum[i] = newCount;
-            newSize += newCount;
+            result.set(c, other.get(c) + get(c));
         }
 
-        LetterInventory result = new LetterInventory();
-        result.letterCount = invSum;
-        result.size = newSize;
         return result;
     }
 
@@ -188,24 +180,20 @@ public class LetterInventory
      */
     public LetterInventory subtract(LetterInventory other)
     {
-        int[] otherInv = other.letterCount;
-        int[] invDiff = new int[26];
-        int newSize = 0;
+        LetterInventory result = new LetterInventory();
 
-        for (int i = 0; i < 26; i++)
+        for (char c = 'a'; c <= 'z'; c++)
         {
-            int diff = letterCount[i] - otherInv[i];
+            int diff = get(c) - other.get(c);
+            
             if (diff < 0)
             {
                 return null;
             }
-            invDiff[i] = diff;
-            newSize += diff;
+            
+            result.set(c, diff);
         }
 
-        LetterInventory result = new LetterInventory();
-        result.letterCount = invDiff;
-        result.size = newSize;
         return result;
     }
 
