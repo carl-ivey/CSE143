@@ -11,8 +11,6 @@ public class LetterInventory
     public int[] letterCount;
     public int size;
 
-    public static final int A_LETTER_INDEX = 0;
-    public static final int Z_LETTER_INDEX = 25;
     public static final int NUM_LETTERS_IN_ALPHABET = 26;
 
     /**
@@ -32,12 +30,14 @@ public class LetterInventory
         {
             for (int i = 0; i < data.length(); i++)
             {
-                int dist = Character.toLowerCase(data.charAt(i)) - 'a';
-                if (dist >= A_LETTER_INDEX && dist <= Z_LETTER_INDEX)
+                char letter = data.charAt(i);
+                if ((letter >= 'a' && letter <= 'z') || 
+                    (letter >= 'A' && letter <= 'Z'))
                 {
+                    int dist = Character.toLowerCase(data.charAt(i)) - 'a';
                     letterCount[dist]++;
                     size++;
-                }
+                }  
             }
         }
     }
