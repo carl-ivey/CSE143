@@ -64,14 +64,14 @@ public class LetterInventory
      */
     public int get(char letter)
     {
-        int index = Character.toLowerCase(letter) - 'a';
-
-        if (index < A_LETTER_INDEX || index > Z_LETTER_INDEX)
+        if (! ((letter >= 'a' && letter <= 'z') || 
+            (letter >= 'A' && letter <= 'Z')) )
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical" +
-                " (a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical " +
+                                                "(a-z), case insensitive.");
         }
-
+        
+        int index = Character.toLowerCase(letter) - 'a';
         return letterCount[index];
     }
 
