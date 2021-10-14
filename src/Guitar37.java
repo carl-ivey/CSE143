@@ -47,8 +47,8 @@ public class Guitar37 implements Guitar
 
         for (int i = 0; i < NUM_STRINGS; i++)
         {
-            double freq = CONCERT_A_FREQ * 
-                Math.pow(2.0, (i - (double) CONCERT_A_OFFSET) / (double) PITCH_MAX_VALUE);
+            double freq = CONCERT_A_FREQ
+                * Math.pow(2.0, (i - 24.0) / 12.0);
             strings[i] = new GuitarString(freq);
         }
     }
