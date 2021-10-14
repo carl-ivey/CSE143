@@ -53,11 +53,11 @@ public class LetterInventory
 
     /**
      * Gets the count of instances of the given alphabetical character 'letter'
-     * in the LetterInventory instance.
+     * in the LetterInventory instance, case-insensitive.
      * 
      * @param letter,
      *            the alphabetical character to get the count of from the
-     *            LetterInventory instance.
+     *            LetterInventory instance. (case-insensitive)
      * @throws IllegalArgumentException
      *             if letter is non-alphabetical.
      * @return the count of the given letter in the LetterInventory instance.
@@ -68,7 +68,8 @@ public class LetterInventory
 
         if (index < A_LETTER_INDEX || index > Z_LETTER_INDEX)
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical" + " (a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical" +
+                " (a-z), case insensitive.");
         }
 
         return letterCount[index];
@@ -76,11 +77,11 @@ public class LetterInventory
 
     /**
      * Sets the count of instances of the given alphabetical character 'letter'
-     * in the LetterInventory instance.
+     * in the LetterInventory instance, case-insensitive.
      * 
      * @param letter,
      *            the alphabetical character to set the count of in the
-     *            LetterInventory instance.
+     *            LetterInventory instance. (case-insensitive)
      * @param value,
      *            the count of the alphabetical character to set in the
      *            LetterInventory instance.
@@ -88,19 +89,21 @@ public class LetterInventory
      *             if letter is non-alphabetical or if value is negative.
      */
     public void set(char letter, int value)
-    {
-        int index = Character.toLowerCase(letter) - 'a';
-
-        if (index < A_LETTER_INDEX || index > Z_LETTER_INDEX)
+    {   
+        if (! ((letter >= 'a' && letter <= 'z') || 
+            (letter >= 'A' && letter <= 'Z')) )
         {
-            throw new IllegalArgumentException("Letter added must be alphabetical " + "(a-z), case insensitive.");
+            throw new IllegalArgumentException("Letter added must be alphabetical " +
+                                                "(a-z), case insensitive.");
         }
 
         if (value < 0)
         {
-            throw new IllegalArgumentException(String.format("Count for char '%c' " + "cannot be negative.", letter));
+            throw new IllegalArgumentException(String.format("Count for char '%c' " +
+                                                "cannot be negative.", letter));
         }
-
+        
+        int index = Character.toLowerCase(letter) - 'a';
         size += value - letterCount[index];
         letterCount[index] = value;
     }
