@@ -1,5 +1,6 @@
 /**
- * Name: LetterInventory.java TA: Kashish Aggarval
+ * Name: LetterInventory.java 
+ * TA: Kashish Aggarval
  * 
  * Stores the counts of alphabetical characters in a given String provided as a
  * constructor argument.
