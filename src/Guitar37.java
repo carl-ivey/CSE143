@@ -22,7 +22,7 @@ public class Guitar37 implements Guitar
     public static final int PITCH_MAX_VALUE = 12; // highest playable pitch on
                                                   // guitar
 
-    public static final int CONCERT_A_OFFSET = 24;
+    private static final int CONCERT_A_OFFSET = 24;
 
     private static final double CONCERT_A_FREQ = 440.0; // the frequency for
                                                         // concert-A tone, Hz.
