@@ -7,7 +7,7 @@ I learned about the applications of linkedlist
 data structures such as how the killer hierarchy
 in the "assassin" game can be represented with
 list nodes. Similarly, the oppressive hierarchies
-represented by the one-way interactions of the
+represented by the one-way connections of the
 linkedlist structure overtly showcased in the
 game of "assassin" reflects the inequities inherent
 to capitalism; the equalizing human instinct of mutual
