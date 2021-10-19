@@ -6,7 +6,42 @@ assignment?
 I learned about the applications of linkedlist
 data structures such as how the killer hierarchy
 in the "assassin" game can be represented with
-list nodes.
+list nodes. Similarly, the oppressive hierarchies
+represented by the one-way interactions of the
+linkedlist structure overtly showcased in the
+game of "assassin" reflects the inequities inherent
+to capitalism; the equalizing human instinct of mutual
+aid throughout history has been made irrelevant
+by the forced competition capitalism begets,
+"assassinated" by the cruel market forces of
+supply and demand, the competitive aspect of which
+capitalism depends on to survive. It is arguable that
+capitalism turns brothers and sisters, once egalitarian, on each other;
+in extreme cases as seen in post-industrial society
+today, the lack of respect laissez-faire capitalism
+shows towards human life, seeing the world solely in
+the lens of profits, has led to the deaths of many
+through exploitation of the human and natural condition;
+an example of this is the phenomena of white-collar
+salarymen in Japan, who have been reported to die from
+exhaustion while attempting to meet the competitive demands
+of their corporate superiors in their attempts to secure capital for
+themselves in the deathly rat-race of society, in which living essentials
+have been commodified by the imaginary construct known as "capital." As such, the
+linkedlist structure and the Assassin game in which the
+linkedlist structure is used subconsciously evokes the
+inequities in the human condition inherently raised by the
+demands of postindustrial capitalism, in which humans are 
+literally worked to death by their wealthier counterparts in a
+desperate bid to exploit materially meaningless resources of capital, 
+similarly to how the game "assassin" simulates a chain of murder 
+in pursuit of the materially meaningless construct of becoming the 
+"winner". Perhaps, the "assassin" game has become popularized
+in American college campuses because colleges in the United States, 
+which have become a condensed reflection of the greater world around them, 
+subconciously mirror the capitalist economy in which they reside in, in which
+the targets of assassination by laissez-faire capitalism are human compassion,
+the universality of living essentials, and the principles of mutual aid.
 
 2) What did you struggle most with on this 
 assignment? How did you work to overcome 
