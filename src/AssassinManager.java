@@ -1,6 +1,6 @@
-
 /**
- * Name: AssassinManager.java TA: Kashish Aggarval
+ * Name: AssassinManager.java
+ * TA: Kashish Aggarval
  * 
  * Tracks the hierarchy of "killers" and "kills" in the college game known as
  * "assassin" given a list of player names in succeeding order of killer-victim
@@ -10,7 +10,7 @@
  * @author Victor Du
  */
 
-import java.util.List;
+import java.util.*;
 
 public class AssassinManager
 {
@@ -21,7 +21,8 @@ public class AssassinManager
 
     /**
      * Initializes an AssassinManager instance given a List<String> of player
-     * names in succeeding order of killer-victim hierarchy to track.
+     * names, without duplicates, in succeeding order of killer-victim hierarchy
+     * to track.
      * 
      * @param names,
      *            a List<String> of player names in succeeding order of
@@ -212,7 +213,8 @@ public class AssassinManager
         if (!killRingContains(name))
         {
             throw new IllegalArgumentException(
-                String.format("Cannot kill player \"%s\":" + " player \"%s\" not in kill ring.", name, name));
+                String.format("Cannot kill player \"%s\":" +
+                    " player \"%s\" not in kill ring.", name, name));
         }
 
         AssassinNode cur = killRingFront;
