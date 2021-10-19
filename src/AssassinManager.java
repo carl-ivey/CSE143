@@ -2,7 +2,7 @@
  * Name: AssassinManager.java
  * TA: Kashish Aggarval
  * 
- * Tracks the hierarchy of "killers" and "kills" in the college game known as
+ * Tracks the hierarchy of "killers" and kills in the college game known as
  * "assassin" given a list of player names in succeeding order of killer-victim
  * hierarchy, by simulating a "kill ring" tracking the killer-victim hierarchy
  * and a "graveyard" tracking the dead players and their respective killers.
