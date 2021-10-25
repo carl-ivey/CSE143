@@ -87,8 +87,6 @@ public class HangmanManager
                 famMap.put(famPattern, family);
             }
         }
-        
-        System.out.println(famMap); // TODO
 
         // locate largest family to set as new word list.
         String bestPattern = null;
