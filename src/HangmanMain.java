@@ -10,7 +10,7 @@ import java.util.*;
 public class HangmanMain
 {
     public static final String DICTIONARY_FILE = "dictionary.txt";
-    public static final boolean SHOW_COUNT = false; // show # of choices left
+    public static final boolean SHOW_COUNT = true; // show # of choices left
 
     public static void main(String[] args) throws FileNotFoundException
     {
