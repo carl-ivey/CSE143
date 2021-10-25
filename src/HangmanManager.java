@@ -10,6 +10,16 @@ public class HangmanManager
 
     public HangmanManager(Collection<String> dictionary, int length, int max)
     {
+        if (length < 1)
+        {
+            throw new IllegalArgumentException("Length cannot be less than 1");
+        }
+        
+        if (max < 0)
+        {
+            throw new IllegalArgumentException("Max tries cannot be less than 0");
+        }
+        
         guessesLeft = max;
         guessedChars = new TreeSet<>();
         wordList = new TreeSet<>();
@@ -49,6 +59,11 @@ public class HangmanManager
 
     public String pattern()
     {
+        if (wordList.isEmpty())
+        {
+            throw new IllegalStateException("Word list can't be empty!");
+        }
+        
         return curPattern;
     }
 
