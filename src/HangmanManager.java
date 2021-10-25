@@ -28,9 +28,10 @@ public class HangmanManager
         
         for (int i = 0; i < length; i++)
         {
-            blankPattern += "-";
+            blankPattern += "- ";
         }
-
+        
+        blankPattern = blankPattern.trim();
         curPattern = blankPattern;
 
         for (String s : dictionary)
@@ -88,8 +89,10 @@ public class HangmanManager
             for (int i = 0; i < s.length(); i++)
             {
                 char c = s.charAt(i);
-                famPattern += (c == guess || c == curPattern.charAt(i)) ? c : '-';
+                famPattern += (c == guess || c == curPattern.charAt(i)) ? c + " " : "- ";
             }
+            
+            famPattern = famPattern.trim();
 
             if (famMap.containsKey(famPattern))
             {
