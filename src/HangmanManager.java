@@ -186,7 +186,7 @@ public class HangmanManager
      * to the pattern chosen. The decision is made by selecting the pattern
      * mapping to the largest family of words in the Map<String, Set<String>>.
      * If all the families have equal corresponding pattern sizes, the first
-     * pattern in alphabetical pattern in the Map will be chosen.
+     * pattern in alphabetical order in the Map will be chosen.
      * 
      * @param famMap,
      *            the map consisting of word patterns mapped to their respective
