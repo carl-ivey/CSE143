@@ -6,33 +6,25 @@ public class HangmanManager
     private Set<Character> guessedChars;
     private int guessesLeft;
     private String curPattern;
-    private String blankPattern;
 
     public HangmanManager(Collection<String> dictionary, int length, int max)
     {
-        if (length < 1)
+        if (length < 1 || max < 0)
         {
-            throw new IllegalArgumentException("Length cannot be less than 1");
+            throw new IllegalArgumentException(
+                length < 1 ? "Length cannot be less than 1" : "Max tries cannot be less than 0");
         }
-        
-        if (max < 0)
-        {
-            throw new IllegalArgumentException("Max tries cannot be less than 0");
-        }
-        
+
         guessesLeft = max;
         guessedChars = new TreeSet<>();
         wordList = new TreeSet<>();
 
-        blankPattern = "";
-        
+        curPattern = "";
+
         for (int i = 0; i < length; i++)
         {
-            blankPattern += "- ";
+            curPattern += "-";
         }
-        
-        blankPattern = blankPattern.trim();
-        curPattern = blankPattern;
 
         for (String s : dictionary)
         {
@@ -64,35 +56,41 @@ public class HangmanManager
         {
             throw new IllegalStateException("Word list can't be empty!");
         }
-        
-        return curPattern;
+
+        String formattedPtn = "";
+
+        for (int i = 0; i < curPattern.length(); i++)
+        {
+            formattedPtn += curPattern.charAt(i);
+            if (i != curPattern.length() - 1)
+            {
+                formattedPtn += " ";
+            }
+        }
+
+        return formattedPtn;
     }
 
-    public int record(char guess)
+    private String generatePattern(char guess, String s)
     {
-        if (guessesLeft <= 0)
+        String pattern = "";
+
+        for (int i = 0; i < s.length(); i++)
         {
-            throw new IllegalStateException("Guesses cannot be less than 0");
+            char c = s.charAt(i);
+            pattern += c == guess ? c : curPattern.charAt(i);
         }
 
-        if (wordList.isEmpty())
-        {
-            throw new IllegalStateException("Word list can't be empty");
-        }
+        return pattern;
+    }
 
+    private Map<String, Set<String>> classifyFamilies(char guess)
+    {
         Map<String, Set<String>> famMap = new TreeMap<>();
 
         for (String s : wordList)
         {
-            String famPattern = "";
-
-            for (int i = 0; i < s.length(); i++)
-            {
-                char c = s.charAt(i);
-                famPattern += (c == guess || c == curPattern.charAt(i)) ? c + " " : "- ";
-            }
-            
-            famPattern = famPattern.trim();
+            String famPattern = generatePattern(guess, s);
 
             if (famMap.containsKey(famPattern))
             {
@@ -106,41 +104,40 @@ public class HangmanManager
             }
         }
 
-        // locate largest family to set as new word list.
+        return famMap;
+    }
+
+    private void chooseBestPattern(Map<String, Set<String>> famMap)
+    {
         String bestPattern = null;
-        int bestSize = -1;
+        int bestSize = 0;
         Set<String> bestFam = null;
 
         for (String pattern : famMap.keySet())
         {
             Set<String> fam = famMap.get(pattern);
-            int size = fam.size();
-            if (size > bestSize)
+
+            int famSize = fam.size();
+
+            if (famSize > bestSize)
             {
                 bestPattern = pattern;
-                bestSize = size;
+                bestSize = famSize;
                 bestFam = fam;
             }
         }
 
-        guessedChars.add(guess);
-
         curPattern = bestPattern;
         wordList = bestFam;
-        
-        if (bestPattern.equals(blankPattern))
-        {
-            // handle "wrong" guess (largest family has blank pattern)
-            guessesLeft--;
-            return 0;
-        }
-
-        // handle right guess (largest family has non-blank pattern)
+    }
+    
+    private int countOccurances(char guess, String pattern)
+    {
         int occ = 0;
 
-        for (int i = 0; i < bestPattern.length(); i++)
+        for (int i = 0; i < pattern.length(); i++)
         {
-            if (bestPattern.charAt(i) == guess)
+            if (pattern.charAt(i) == guess)
             {
                 occ++;
             }
@@ -149,4 +146,36 @@ public class HangmanManager
         return occ;
     }
 
+    public int record(char guess)
+    {
+        if (guessedChars.contains(guess))
+        {
+            throw new IllegalArgumentException(String.format("Character %c was already guessed!\n", guess));
+        }
+
+        if (guessesLeft <= 0 || wordList.isEmpty())
+        {
+            throw new IllegalStateException(
+                guessesLeft <= 0 ? "Guesses must be above 1!" : "Word list can't be empty!");
+        }
+
+        guessedChars.add(guess);
+
+        Map<String, Set<String>> famMap = classifyFamilies(guess);
+
+        //System.out.println(famMap);
+
+        // locate largest family to set as new word list.
+        chooseBestPattern(famMap);
+        //System.out.println("Pattern picked: \"" + bestPattern + "\"");
+
+        int occurances = countOccurances(guess, curPattern);
+
+        if (occurances == 0)
+        {
+            guessesLeft--;
+        }
+
+        return occurances;
+    }
 }
