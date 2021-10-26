@@ -1,3 +1,15 @@
+
+/**
+ * Name: HangmanManager.java TA: Kashish Aggarval
+ * 
+ * Manages decision-making for a rigged game of "hangman" in which the
+ * computer-controlled opponent deliberately considers multiple words that can
+ * be the secret word, to prolong the guesses made by the user for as long as
+ * possible.
+ * 
+ * @author Victor Du
+ */
+
 import java.util.*;
 
 public class HangmanManager
@@ -7,6 +19,26 @@ public class HangmanManager
     private int guessesLeft;
     private String curPattern;
 
+    /**
+     * Initializes a HangmanManager instance given a Collection<String> of
+     * possible answers, the length of the word to guess, and the maximum number
+     * of wrong guesses the user is allowed to make. Any duplicate words or
+     * words not matching the specified length in the given Collection<String>
+     * will be ignored.
+     * 
+     * @param dictionary,
+     *            the Collection<String> of possible visits.
+     * 
+     * @param length,
+     *            the length of the word to guess. Must be at least 1.
+     * 
+     * @param max,
+     *            the maximum number of wrong guesses the user is allowed to
+     *            make. Must be at least 0.
+     * 
+     * @throws IllegalArgumentException,
+     *             if length is less than 1 or max is less than zero.
+     */
     public HangmanManager(Collection<String> dictionary, int length, int max)
     {
         if (length < 1 || max < 0)
@@ -35,21 +67,38 @@ public class HangmanManager
         }
     }
 
+    /**
+     * @return the Set<String> of possible answers corresponding to the current
+     *         hangman pattern.
+     */
     public Set<String> words()
     {
         return wordList;
     }
 
+    /**
+     * @return the number of allowable wrong guesses remaining.
+     */
     public int guessesLeft()
     {
         return guessesLeft;
     }
 
+    /**
+     * @return the Set<Character> of characters the user has already guessed.
+     */
     public Set<Character> guesses()
     {
         return guessedChars;
     }
 
+    /**
+     * @return the current word pattern based on existing guesses made by the
+     *         user.
+     * 
+     * @throws IllegalStateException
+     *             if there are no possible answers.
+     */
     public String pattern()
     {
         if (wordList.isEmpty())
@@ -71,6 +120,18 @@ public class HangmanManager
         return formattedPtn;
     }
 
+    /**
+     * Internal helper method to generate the hangman word pattern for a given
+     * word and the correctly-guessed character.
+     * 
+     * @param guess,
+     *            the character that was correctly guessed.
+     * 
+     * @param s,
+     *            the word to generate the pattern for.
+     * 
+     * @return the hangman pattern for the given word and the guessed character
+     */
     private String generatePattern(char guess, String s)
     {
         String pattern = "";
@@ -84,6 +145,17 @@ public class HangmanManager
         return pattern;
     }
 
+    /**
+     * Internal helper method to map all possible patterns of words for a given
+     * guessed character to their respective Set<String> families of possible
+     * words.
+     * 
+     * @param guess,
+     *            the guessed character to map the word families with regard to.
+     * 
+     * @return a Map<String, Set<String>> of all possible patterns of words for
+     *         the character guess mapped to their respective families of words.
+     */
     private Map<String, Set<String>> classifyFamilies(char guess)
     {
         Map<String, Set<String>> famMap = new TreeMap<>();
@@ -107,6 +179,19 @@ public class HangmanManager
         return famMap;
     }
 
+    /**
+     * Internal helper method to choose the best pattern in a Map<String,
+     * Set<String>> consisting of word patterns mapped to their respective word
+     * families, and set the current word pattern of the HangmanManager instance
+     * to the pattern chosen. The decision is made by selecting the pattern
+     * mapping to the largest family of words in the Map<String, Set<String>>.
+     * If all the families have equal corresponding pattern sizes, the first
+     * pattern in alphabetical pattern in the Map will be chosen.
+     * 
+     * @param famMap,
+     *            the map consisting of word patterns mapped to their respective
+     *            word families from which to select the chosen pattern.
+     */
     private void chooseBestPattern(Map<String, Set<String>> famMap)
     {
         String bestPattern = null;
@@ -130,7 +215,20 @@ public class HangmanManager
         curPattern = bestPattern;
         wordList = bestFam;
     }
-    
+
+    /**
+     * Internal helper method to count the number of occurrences of a specified
+     * character, guess, in a given String 'pattern'.
+     * 
+     * @param guess,
+     *            the character to return the count of in the given String.
+     *            
+     * @param pattern,
+     *            the String to search for the character in.
+     *            
+     * @return the number of occurrences of character 'guess' in String
+     *         'pattern'.
+     */
     private int countOccurances(char guess, String pattern)
     {
         int occ = 0;
@@ -162,12 +260,7 @@ public class HangmanManager
         guessedChars.add(guess);
 
         Map<String, Set<String>> famMap = classifyFamilies(guess);
-
-        //System.out.println(famMap);
-
-        // locate largest family to set as new word list.
         chooseBestPattern(famMap);
-        //System.out.println("Pattern picked: \"" + bestPattern + "\"");
 
         int occurances = countOccurances(guess, curPattern);
 
