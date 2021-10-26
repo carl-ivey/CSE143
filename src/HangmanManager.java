@@ -1,6 +1,6 @@
-
 /**
- * Name: HangmanManager.java TA: Kashish Aggarval
+ * Name: HangmanManager.java
+ * TA: Kashish Aggarval
  * 
  * Manages decision-making for a rigged game of "hangman" in which the
  * computer-controlled opponent deliberately considers multiple words that can
@@ -222,14 +222,14 @@ public class HangmanManager
      * 
      * @param guess,
      *            the character to return the count of in the given String.
-     *            
+     * 
      * @param pattern,
      *            the String to search for the character in.
-     *            
+     * 
      * @return the number of occurrences of character 'guess' in String
      *         'pattern'.
      */
-    private int countOccurances(char guess, String pattern)
+    private int countOccurrences(char guess, String pattern)
     {
         int occ = 0;
 
@@ -244,6 +244,27 @@ public class HangmanManager
         return occ;
     }
 
+    /**
+     * Records that the user made a guess of a given character, 'guess', and
+     * reduces the working set of words to decide from given that character.
+     * Finally, returns the number of occurrences of the guessed character
+     * within the updated hangman word pattern. If there are no occurrences of
+     * the guessed character in the word pattern, the guesses the user has left
+     * will be decreased by one.
+     * 
+     * @param guess,
+     *            the character to record the guessing of.
+     * 
+     * @return the occurrences of the guessed character in the updated hangman
+     *         word pattern.
+     * 
+     * @throws IllegalArgumentException,
+     *             if the character 'guess' was already guessed.
+     * 
+     * @throws IllegalStateException,
+     *             if there are no possible words corresponding the current
+     *             hangman pattern or if there are no guesses left.
+     */
     public int record(char guess)
     {
         if (guessedChars.contains(guess))
@@ -262,13 +283,13 @@ public class HangmanManager
         Map<String, Set<String>> famMap = classifyFamilies(guess);
         chooseBestPattern(famMap);
 
-        int occurances = countOccurances(guess, curPattern);
+        int occurrences = countOccurrences(guess, curPattern);
 
-        if (occurances == 0)
+        if (occurrences == 0)
         {
             guessesLeft--;
         }
 
-        return occurances;
+        return occurrences;
     }
 }
