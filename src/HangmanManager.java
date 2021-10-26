@@ -245,12 +245,12 @@ public class HangmanManager
     }
 
     /**
-     * Records that the user made a guess of a given character, 'guess', and
-     * reduces the working set of words to decide from given that character.
-     * Finally, returns the number of occurrences of the guessed character
-     * within the updated hangman word pattern. If there are no occurrences of
-     * the guessed character in the word pattern, the guesses the user has left
-     * will be decreased by one.
+     * Records that the user made a guess of a given character, 'guess', updates
+     * the hangman pattern, and reduces the working set of words to decide from
+     * given that character. Finally, returns the number of occurrences of the
+     * guessed character within the updated hangman word pattern. If there are
+     * no occurrences of the guessed character in the word pattern, the guesses
+     * the user has left will be decreased by one.
      * 
      * @param guess,
      *            the character to record the guessing of.
@@ -269,7 +269,8 @@ public class HangmanManager
     {
         if (guessedChars.contains(guess))
         {
-            throw new IllegalArgumentException(String.format("Character %c was already guessed!\n", guess));
+            throw new IllegalArgumentException(
+                String.format("Character %c was already guessed!\n", guess));
         }
 
         if (guessesLeft <= 0 || wordList.isEmpty())
