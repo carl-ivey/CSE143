@@ -15,8 +15,6 @@ import java.util.*;
 public class AssassinManager
 {
     private AssassinNode killRingFront;
-    private AssassinNode killRingBack;
-
     private AssassinNode graveyardFront;
 
     /**
@@ -43,22 +41,15 @@ public class AssassinManager
             throw new IllegalArgumentException("names cannot be an empty list!");
         }
 
-        AssassinNode prev = null;
+        killRingFront = new AssassinNode(names.get(0));
+        AssassinNode prev = killRingFront;
 
-        for (String name : names)
+        for (int i = 1; i < names.size(); i++)
         {
-            if (killRingFront == null)
-            {
-                killRingFront = new AssassinNode(name);
-                prev = killRingFront;
-            }
-            else
-            {
-                AssassinNode node = new AssassinNode(name);
-                prev.next = node;
-                prev = node;
-                killRingBack = node;
-            }
+            String name = names.get(i);
+            AssassinNode node = new AssassinNode(name);
+            prev.next = node;
+            prev = node;
         }
     }
 
@@ -190,6 +181,23 @@ public class AssassinManager
     }
 
     /**
+     * Internal helper method to return the back of the kill ring.
+     * 
+     * @return the back of the kill ring.
+     */
+    private AssassinNode getKillRingBack()
+    {
+        AssassinNode cur = killRingFront;
+        
+        while (cur.next != null)
+        {
+            cur = cur.next;
+        }
+        
+        return cur;
+    }
+    
+    /**
      * Marks a living assassin in the game as dead by moving them to the
      * graveyard and recording the name of their assigned killer.
      * 
@@ -228,7 +236,7 @@ public class AssassinManager
 
             if (searchNameLower.equals(curNameLower))
             {
-                AssassinNode killer = prev == null ? killRingBack : prev;
+                AssassinNode killer = prev == null ? getKillRingBack() : prev;
 
                 cur.killer = killer.name;
 
