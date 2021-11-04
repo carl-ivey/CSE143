@@ -56,6 +56,7 @@ public class HangmanManager
         for (int i = 0; i < length; i++)
         {
             curPattern += "-";
+            curPattern += i != length - 1 ? " " : "";
         }
 
         for (String s : dictionary)
@@ -106,18 +107,7 @@ public class HangmanManager
             throw new IllegalStateException("Word list can't be empty!");
         }
 
-        String formattedPtn = "";
-
-        for (int i = 0; i < curPattern.length(); i++)
-        {
-            formattedPtn += curPattern.charAt(i);
-            if (i != curPattern.length() - 1)
-            {
-                formattedPtn += " ";
-            }
-        }
-
-        return formattedPtn;
+        return curPattern;
     }
 
     /**
@@ -139,7 +129,8 @@ public class HangmanManager
         for (int i = 0; i < s.length(); i++)
         {
             char c = s.charAt(i);
-            pattern += c == guess ? c : curPattern.charAt(i);
+            pattern += c == guess ? c : curPattern.charAt(i * 2);
+            pattern += i == s.length() - 1 ? "" : " ";
         }
 
         return pattern;
@@ -233,7 +224,7 @@ public class HangmanManager
     {
         int occ = 0;
 
-        for (int i = 0; i < pattern.length(); i++)
+        for (int i = 0; i < pattern.length(); i += 2)
         {
             if (pattern.charAt(i) == guess)
             {
@@ -250,7 +241,8 @@ public class HangmanManager
      * given that character. Finally, returns the number of occurrences of the
      * guessed character within the updated hangman word pattern. If there are
      * no occurrences of the guessed character in the word pattern, the guesses
-     * the user has left will be decreased by one.
+     * the user has left will be decreased by one. Thus, the record method updates
+     * the state of the game.
      * 
      * @param guess,
      *            the character to record the guessing of.
