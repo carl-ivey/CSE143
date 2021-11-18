@@ -37,7 +37,7 @@ public class AnagramSolver
     private void computeAnagrams(List<String> choices, LetterInventory remaining, 
                                     Stack<String> res, int max, boolean limOn)
     {
-        if ((limOn && max >= 0) || !limOn)
+        if (remaining != null && ((limOn && max >= 0) || !limOn)) 
         {
             if (remaining.size() == 0)
             {
@@ -49,17 +49,12 @@ public class AnagramSolver
                 {
                     LetterInventory choiceInv = invMap.get(choice);
                     LetterInventory newRem = remaining.subtract(choiceInv);
-                    
-                    if (newRem != null)
-                    {
-                        res.push(choice);
-                        computeAnagrams(choices, newRem, res, max - 1, limOn);
-                        res.pop();
-                    }
+                    res.push(choice);
+                    computeAnagrams(choices, newRem, res, max - 1, limOn);
+                    res.pop();
                 }
             }
         }
-        
     }
     
     public void print(String text, int max)
@@ -69,8 +64,8 @@ public class AnagramSolver
             throw new IllegalArgumentException();
         }
         
-        List<String> pruned = getPrunedWords(text, wordList);
-        computeAnagrams(pruned, new LetterInventory(text), new Stack<String>(), max, max != 0);
-        
+        List<String> prunedList = getPrunedWords(text, wordList);
+        computeAnagrams(prunedList, new LetterInventory(text), 
+            new Stack<String>(), max, max != 0);
     }
 }
