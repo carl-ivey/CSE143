@@ -72,8 +72,8 @@ public class AnagramSolver
      * @param remaining, the LetterInventory of letter counts of the search word's contents.
      * @param res, a Stack<String>, initially blank,
      *             used to temporarily track the current working anagram combination
-     * @param max, the number of combinations to print before ending the search.
-     * @param limOn, whether to limit the search to max number of results.
+     * @param max, the maximum length of combinations to search before ending search.
+     * @param limOn, whether to limit the search to a max length.
      */
     private void computeAnagrams(List<String> choices, LetterInventory remaining, 
                                     Stack<String> res, int max, boolean limOn)
@@ -103,8 +103,8 @@ public class AnagramSolver
      * the given String, text.
      * 
      * @param text, the String to print all combinations of anagrams of.
-     * @param max, the number of combinations to print before ending the search,
-     *              or zero if all combinations should be printed without limit.
+     * @param max, the maximum length of combinations to search,
+     *              or zero if all combinations should be printed without length limit.
      * @throws IllegalArgumentException, if max is less than zero.
      */
     public void print(String text, int max)
