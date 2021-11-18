@@ -1,0 +1,36 @@
+Assesement 6: AnagramSolver Reflection
+
+1) What did you learn from working on this 
+assignment?
+
+I learned about practical applications of recursive
+backtracking from workign on this assignment.
+
+2) What did you struggle most with on this 
+assignment? How did you work to overcome 
+that struggle (even if you weren't able to)?
+
+I struggled most with the backtracking part of
+recursive backtracking as you have to "undo"
+the changes made to the current working order
+after the recursion has ended.
+
+3) How will you use what you learned from 
+this assignment to improve your process or 
+approach on future assignments?
+
+I will use my improved understanding of recursive
+backtracking to complete future assignments faster.
+
+4) Was any part of the specification or 
+requirements unclear? If so, what part(s), 
+and how could it have been made clearer?
+
+N/A, specifications and requirements were
+sufficiently clear.
+
+5) About how many hours did you spend working 
+on this assignment? (Estimates are fine, but 
+try to get close)
+
+1.5 hours
