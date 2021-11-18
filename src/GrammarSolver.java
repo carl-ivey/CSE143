@@ -17,8 +17,7 @@ public class GrammarSolver
 
     /**
      * Initializes a GrammarSolver instance given a List<String> of Bauckus-Naur
-     * grammar rules for the GrammarSolver instance to follow, one rule per
-     * entry.
+     * grammar rules to follow, one rule per entry.
      * 
      * @param rules,
      *            a List<String> of Bauckus-Naur grammar rules for the
@@ -65,11 +64,11 @@ public class GrammarSolver
 
     /**
      * @param symbol,
-     *            the symbol to check whether the GrammarSolver contains a
-     *            non-terminal by that name in its grammar rules.
+     *            the symbol to check whether a non-terminal by that name 
+     *            in the grammar rules.
      * 
-     * @return whether the GrammarSolver instance contains a grammar rule by the
-     *         given non-terminal, symbol.
+     * @return whether a non-terminal by that name 
+     *            in the grammar rules.
      */
     public boolean grammarContains(String symbol)
     {
@@ -87,11 +86,11 @@ public class GrammarSolver
     }
 
     /**
-     * Internal helper method to generate a sentence given the non-terminal
-     * symbol to start the sentence from.
+     * Helper method to generate a sentence given the non-terminal
+     * symbol to start the sentence with.
      * 
      * @param symbol,
-     *            the non-terminal symbol to generate the sentence from.
+     *            the non-terminal symbol to start the sentence with
      * 
      * @return a sentence generated from the non-terminal symbol String, symbol.
      */
@@ -122,8 +121,7 @@ public class GrammarSolver
 
     /**
      * Procedurally generates a String[] of size times, of sentences compliant
-     * with the grammar rules of the GrammarSolver instance from a given
-     * non-terminal symbol.
+     * with the grammar rules, starting with a given non-terminal symbol.
      * 
      * @param symbol,
      *            the non-terminal symbol to generate the sentences from.
@@ -135,8 +133,8 @@ public class GrammarSolver
      * @throws IllegalArgumentException
      *             if times is negative or if symbol is not a non-terminal.
      * 
-     * @return a String[] of sentences compliant with the grammar rules of the
-     *         GrammarSolver instance.
+     * @return a String[] of sentences starting with the given
+     *          non-terminal compliant with the set grammar rules.
      */
     public String[] generate(String symbol, int times)
     {
