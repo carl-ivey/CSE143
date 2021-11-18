@@ -4,6 +4,8 @@ public class AnagramSolver
 {
     private Map<String, LetterInventory> invMap;
     private List<String> wordList;
+    
+    private static final boolean PRUNE_EACH_SEARCH_ITER = true;
 
     public AnagramSolver(List<String> dictionary)
     {
@@ -34,7 +36,7 @@ public class AnagramSolver
         return pruned;
     }    
 
-    private void computeAnagrams(List<String> choices, LetterInventory remaining, 
+    private void computeAnagrams(String anagramTarget, List<String> choices, LetterInventory remaining, 
                                     Stack<String> res, int max, boolean limOn)
     {
         if (remaining != null && ((limOn && max >= 0) || !limOn)) 
@@ -50,7 +52,9 @@ public class AnagramSolver
                     LetterInventory choiceInv = invMap.get(choice);
                     LetterInventory newRem = remaining.subtract(choiceInv);
                     res.push(choice);
-                    computeAnagrams(choices, newRem, res, max - 1, limOn);
+                    List<String> nextChoices = PRUNE_EACH_SEARCH_ITER ? 
+                        getPrunedWords(anagramTarget, choices) : choices;
+                    computeAnagrams(anagramTarget, nextChoices, newRem, res, max - 1, limOn);
                     res.pop();
                 }
             }
@@ -65,7 +69,7 @@ public class AnagramSolver
         }
         
         List<String> prunedList = getPrunedWords(text, wordList);
-        computeAnagrams(prunedList, new LetterInventory(text), 
+        computeAnagrams(text, prunedList, new LetterInventory(text), 
             new Stack<String>(), max, max != 0);
     }
 }
