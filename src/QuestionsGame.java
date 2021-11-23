@@ -74,13 +74,13 @@ public class QuestionsGame
             }
             else
             {
-                System.out.println("What is the name of your object?");
+                System.out.print("What is the name of your object? ");
                 
                 String name = console.nextLine();
                 
-                System.out.println("Please give me a yes/no question that\n"
-                    + "distinguishes between your object\n"
-                    + "and mine--> ");
+                System.out.println("Please give me a yes/no question that");
+                System.out.println("distinguishes between your object");
+                System.out.print("and mine--> ");
                 
                 String question = console.nextLine();
                 
