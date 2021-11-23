@@ -1,0 +1,30 @@
+Q:
+Is it an animal?
+Q:
+Can it fly?
+Q:
+does it make honey
+A:
+bee
+A:
+bird
+Q:
+Does it have a tail?
+A:
+mouse
+A:
+spider
+Q:
+Does it have wheels?
+Q:
+Does it get stuck in traffic?
+A:
+car
+A:
+bicycle
+Q:
+Is it nice?
+A:
+TA
+A:
+teacher
