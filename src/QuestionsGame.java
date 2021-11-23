@@ -2,10 +2,11 @@
  * Name: QuestionsGame.java
  * TA: Kashish Aggarval
  * 
- * Represents the tree-like structure of linked questions used by a computer to
- * guess an answer from a player for playing guessing games such as 20
- * Questions, which can be loaded from a Scanner or constructed dynamically as
- * the gameplay progresses.
+ * Handles gameplay for a game of 20 Questions in which
+ * the computer attempts to guess a thing the player
+ * is thinking about from a database of yes/no questions
+ * which can be custom-loaded or dynamically modified as
+ * the computer learns more objects from losing.
  * 
  * @author Victor Du
  */
