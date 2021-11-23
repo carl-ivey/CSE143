@@ -1,3 +1,14 @@
+/**
+ * Name: QuestionsGame.java TA: Kashish Aggarval
+ * 
+ * Represents the tree-like structure of linked questions used by a computer to
+ * guess an answer from a player for playing guessing games such as 20
+ * Questions, which can be loaded from a Scanner or constructed dynamically as
+ * the gameplay progresses.
+ * 
+ * @author Victor Du
+ */
+
 import java.util.*;
 import java.io.*;
 
@@ -6,17 +17,25 @@ public class QuestionsGame
     private QuestionNode treeHead;
     private Scanner console;
 
+    /**
+     * Initializes an instance of QuestionGame, with only one answer for the
+     * computer to guess, namely "computer".
+     */
     public QuestionsGame()
     {
         treeHead = new QuestionNode("computer");
         console = new Scanner(System.in);
     }
-    
-    private boolean nodeIsAnswer(QuestionNode node)
-    {
-        return node.yes == null && node.no == null;
-    }
 
+    /**
+     * Internal helper method to construct the QuestionsGame data structure from
+     * a given Scanner input to read the formatted data from.
+     * 
+     * @param input,
+     *            the Scanner to construct the QuestionsGame data from.
+     * 
+     * @return a QuestionNode constructed from the data given by input
+     */
     private QuestionNode constructTree(Scanner input)
     {
         if (!input.hasNextLine())
@@ -38,11 +57,40 @@ public class QuestionsGame
         return cur;
     }
 
+    /**
+     * Replaces the current contents of the QuestionsGame data structure with
+     * those given by the Scanner, input.
+     * 
+     * @param input,
+     *            the Scanner to construct the QuestionsGame data from.
+     */
     public void read(Scanner input)
     {
         treeHead = constructTree(input);
     }
 
+    /**
+     * Internal helper method to return whether a given QuestionNode is an
+     * answer node.
+     * 
+     * @return whether a given QuestionNode is an answer node.
+     */
+    private boolean nodeIsAnswer(QuestionNode node)
+    {
+        return node.yes == null && node.no == null;
+    }
+
+    /**
+     * Internal helper method to write the contents of a given QuestionNode and
+     * its child nodes to a given PrintStream, output.
+     * 
+     * @param cur,
+     *            the QuestionNode to write the contents of.
+     * 
+     * @param output,
+     *            the PrintStream to write the QuestionNode's and constitutent
+     *            child nodes' contents to.
+     */
     private void writeTree(QuestionNode cur, PrintStream output)
     {
         if (cur != null)
@@ -55,17 +103,36 @@ public class QuestionsGame
         }
     }
 
+    /**
+     * Outputs the contents of the QuestionsGame' stored data to a PrintStream,
+     * output.
+     * 
+     * @param output,
+     *            the PrintStream to output the stored data to.
+     */
     public void write(PrintStream output)
     {
         writeTree(treeHead, output);
     }
 
+    /**
+     * Internal helper method to handle guessing game gameplay with the user,
+     * starting with a given QuestionNode to prompt the user with and asking
+     * yes/no questions to narrow down the answer.
+     * 
+     * @param cur,
+     *            the QuestionNode to prompt the user with
+     * 
+     * @return cur in its original form if the computer's guess is correct, or
+     *         an altered QuestionNode accomodating the new guessing object
+     *         added to the guessing data.
+     */
     private QuestionNode executeTree(QuestionNode cur)
     {
         boolean isAns = nodeIsAnswer(cur);
-        boolean isYes = yesTo(isAns ? "Would your object happen to be " + cur.data + "?" :
+        boolean isYes = yesTo(isAns ? "Would your object happen to be " + cur.data + "?" : 
                                 cur.data);
-        
+
         if (isAns)
         {
             if (isYes)
@@ -75,23 +142,22 @@ public class QuestionsGame
             else
             {
                 System.out.print("What is the name of your object? ");
-                
+
                 String name = console.nextLine();
-                
+
                 System.out.println("Please give me a yes/no question that");
                 System.out.println("distinguishes between your object");
                 System.out.print("and mine--> ");
-                
+
                 String question = console.nextLine();
-                
+
                 boolean ansIsYes = yesTo("And what is the answer for your object?");
-                
-                QuestionNode lastQuestion = new QuestionNode(question);
+
                 QuestionNode conclusion = new QuestionNode(name);
-                
-                lastQuestion.yes = ansIsYes ? conclusion : cur;
-                lastQuestion.no = ansIsYes ? cur : conclusion;
-                
+                QuestionNode lastQuestion = ansIsYes ? 
+                        new QuestionNode(question, conclusion, cur) : 
+                        new QuestionNode(question, cur, conclusion);
+
                 return lastQuestion;
             }
         }
@@ -106,10 +172,17 @@ public class QuestionsGame
                 cur.no = executeTree(cur.no);
             }
         }
-        
+
         return cur;
     }
 
+    /**
+     * Executes one round of 20 Questions gameplay, where the computer prompts
+     * the user with yes/no questions to guess what object the user is thinking
+     * of. If the computer does not sucessfully guess the object the user had
+     * in mind, asks the user what object they were thinking of and updates the
+     * guessing data of QuestionsGame accordingly.
+     */
     public void askQuestions()
     {
         treeHead = executeTree(treeHead);
