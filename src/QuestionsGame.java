@@ -11,6 +11,11 @@ public class QuestionsGame
         treeHead = new QuestionNode("computer");
         console = new Scanner(System.in);
     }
+    
+    private boolean nodeIsAnswer(QuestionNode node)
+    {
+        return node.yes == null && node.no == null;
+    }
 
     private QuestionNode constructTree(Scanner input)
     {
@@ -42,7 +47,7 @@ public class QuestionsGame
     {
         if (cur != null)
         {
-            boolean isAns = cur.yes == null && cur.no == null;
+            boolean isAns = nodeIsAnswer(cur);
             output.println(isAns ? "A:" : "Q:");
             output.println(cur.data);
             writeTree(cur.yes, output);
@@ -55,10 +60,10 @@ public class QuestionsGame
         writeTree(treeHead, output);
     }
 
-    private void executeTree(QuestionNode cur, QuestionNode prev)
+    private QuestionNode executeTree(QuestionNode cur)
     {
-        boolean isAns = cur.yes == null && cur.no == null;
-        boolean isYes = yesTo(isAns ? "Would your answer happen to be " + cur.data :
+        boolean isAns = nodeIsAnswer(cur);
+        boolean isYes = yesTo(isAns ? "Would your object happen to be " + cur.data + "?" :
                                 cur.data);
         
         if (isAns)
@@ -87,20 +92,27 @@ public class QuestionsGame
                 lastQuestion.yes = ansIsYes ? conclusion : cur;
                 lastQuestion.no = ansIsYes ? cur : conclusion;
                 
-                prev.yes = prev.yes == cur ? lastQuestion : prev.yes;
-                prev.no = prev.no == cur ? lastQuestion : prev.no;
+                return lastQuestion;
             }
         }
         else
         {
-            //recursive traversal of question tree
-            executeTree(isYes ? cur.yes : cur.no, cur);
+            if (isYes)
+            {
+                cur.yes = executeTree(cur.yes);
+            }
+            else
+            {
+                cur.no = executeTree(cur.no);
+            }
         }
+        
+        return cur;
     }
 
     public void askQuestions()
     {
-        executeTree(treeHead, null);
+        treeHead = executeTree(treeHead);
     }
 
     // Do not modify this method in any way
