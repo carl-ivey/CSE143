@@ -1,5 +1,6 @@
 /**
- * Name: QuestionsGame.java TA: Kashish Aggarval
+ * Name: QuestionsGame.java
+ * TA: Kashish Aggarval
  * 
  * Represents the tree-like structure of linked questions used by a computer to
  * guess an answer from a player for playing guessing games such as 20
@@ -88,7 +89,7 @@ public class QuestionsGame
      *            the QuestionNode to write the contents of.
      * 
      * @param output,
-     *            the PrintStream to write the QuestionNode's and constitutent
+     *            the PrintStream to write the QuestionNode's and constituent
      *            child nodes' contents to.
      */
     private void writeTree(QuestionNode cur, PrintStream output)

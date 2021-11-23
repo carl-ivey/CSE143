@@ -1,0 +1,36 @@
+Assesement 7: QuestionsGame Reflection
+
+1) What did you learn from working on this 
+assignment?
+
+I learned how to use recursion and the x=change(x)
+tree node modification convention to implement a 
+guessing game.
+
+2) What did you struggle most with on this 
+assignment? How did you work to overcome 
+that struggle (even if you weren't able to)?
+
+I struggled most with ensuring my code outputted
+the expected output verbatim, due to sleep deprivation.
+I overcame this struggle using copious amounts of
+caffeine.
+
+3) How will you use what you learned from 
+this assignment to improve your process or 
+approach on future assignments?
+
+I shall take more caffeine before commencing
+coursework if I feel sleep-deprived.
+
+4) Was any part of the specification or 
+requirements unclear? If so, what part(s), 
+and how could it have been made clearer?
+
+N/A
+
+5) About how many hours did you spend working 
+on this assignment? (Estimates are fine, but 
+try to get close)
+
+approximately 3 hours
