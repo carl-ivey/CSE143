@@ -35,26 +35,25 @@ public class AnagramSolver
     
     /**
      * Internal helper method to prune a given List<String> of words for
-     * words that for sure cannot be anagrams of a given String, by
-     * containing extraneous characters, and return a List<String> of the
+     * words that for sure cannot be anagrams of a given LetterInventory 
+     * by containing extraneous characters, and return a List<String> of the
      * contents of the given List<String> with the words containing extraneous
      * characters pruned.
      * 
-     * @param text, the String to prune the word list against.
+     * @param inv, the LetterInventory to prune the word list against.
      * @param wordList, the List<String> of words to prune.
      * @return a List<String> of words containing the contents of wordList,
      *          with all impossible Strings pruned.
      */
-    private List<String> getPrunedWords(String text, List<String> wordList)
+    private List<String> getPrunedWords(LetterInventory inv, List<String> wordList)
     {
-        LetterInventory curInv = new LetterInventory(text);
         List<String> pruned = new ArrayList<>();
         
         for (String word : wordList)
         {
             LetterInventory testInv = invMap.get(word);
             
-            if (curInv.subtract(testInv) != null)
+            if (inv.subtract(testInv) != null)
             {
                 pruned.add(word);
             }
@@ -115,8 +114,8 @@ public class AnagramSolver
                 "Max cannot be less than zero.");
         }
         
-        List<String> prunedList = getPrunedWords(text, wordList);
-        computeAnagrams(prunedList, new LetterInventory(text),
-            new Stack<String>(), max, max != 0);
+        LetterInventory inv = new LetterInventory(text);
+        List<String> prunedList = getPrunedWords(inv, wordList);
+        computeAnagrams(prunedList, inv, new Stack<String>(), max, max != 0);
     }
 }
