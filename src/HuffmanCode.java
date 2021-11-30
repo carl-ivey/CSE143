@@ -113,7 +113,7 @@ public class HuffmanCode
         {
             if (isLeafNode(cur))
             {
-                output.print((char)(int)cur.letter);
+                output.print((char)cur.letter);
                 cur = root;
             }
             
