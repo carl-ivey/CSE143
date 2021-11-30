@@ -26,7 +26,7 @@ public class HuffmanCode
         }
     }
     
-    private HuffmanNode updateHuffTree(HuffmanNode cur, int letter, String order)
+    private HuffmanNode updateHuffTree(HuffmanNode cur, int asciiVal, String order)
     {
         if (cur == null)
         {
@@ -35,18 +35,18 @@ public class HuffmanCode
         
         if (order.length() == 0)
         {
-            return new HuffmanNode(letter, 0);
+            return new HuffmanNode(asciiVal, 0);
         }
         
         char next = order.charAt(0);
         
         if (next == '0')
         {
-            cur.left = updateHuffTree(cur.left, letter, order.substring(1));
+            cur.left = updateHuffTree(cur.left, asciiVal, order.substring(1));
         }
         else
         {
-            cur.right = updateHuffTree(cur.right, letter, order.substring(1));
+            cur.right = updateHuffTree(cur.right, asciiVal, order.substring(1));
         }
         
         return cur;
@@ -71,9 +71,9 @@ public class HuffmanCode
     {
         while (input.hasNext())
         {
-            int letter = input.nextInt();
+            int asciiVal = input.nextInt();
             String order = input.next();
-            root = updateHuffTree(root, letter, order);
+            root = updateHuffTree(root, asciiVal, order);
         }
     }
     
@@ -89,7 +89,7 @@ public class HuffmanCode
             // check if cur is leaf!
             if (isLeafNode(cur))
             {
-                output.println(cur.letter);
+                output.println(cur.asciiVal);
                 output.println(path);
             }
             else
@@ -113,7 +113,7 @@ public class HuffmanCode
         {
             if (isLeafNode(cur))
             {
-                output.print((char)cur.letter);
+                output.print((char) cur.asciiVal);
                 cur = root;
             }
             
@@ -124,7 +124,7 @@ public class HuffmanCode
     
     private static class HuffmanNode implements Comparable<HuffmanNode>
     {
-        public int letter;
+        public int asciiVal;
         public int frequency;
         public HuffmanNode left;
         public HuffmanNode right;
@@ -135,9 +135,9 @@ public class HuffmanCode
             this(-1, -1);
         }
         
-        public HuffmanNode(int letter, int frequency)
+        public HuffmanNode(int asciiVal, int frequency)
         {
-            this.letter = letter;
+            this.asciiVal = asciiVal;
             this.frequency = frequency;
         }
 
