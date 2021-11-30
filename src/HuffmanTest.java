@@ -1,18 +1,30 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class HuffmanTest
 {
-    public static void main(String[] args)
+    public static final int MODE = 0;
+    
+    @SuppressWarnings("all")
+    public static void main(String[] args) throws FileNotFoundException
     {
-        int[] frequencies = new int[1+(int)'z'];
-        frequencies[(int)' '] = 1;
-        frequencies[(int)'c'] = 1;
-        frequencies[(int)'d'] = 1;
-        frequencies[(int)'a'] = 2;
-        frequencies[(int)'b'] = 2;
-        HuffmanCode code = new HuffmanCode(frequencies);
-        code.save(System.out);
+        if (MODE == 0)
+        {
+            int[] frequencies = new int[1+(int)'z'];
+            frequencies[(int)' '] = 1;
+            frequencies[(int)'c'] = 1;
+            frequencies[(int)'d'] = 1;
+            frequencies[(int)'a'] = 2;
+            frequencies[(int)'b'] = 2;
+            HuffmanCode code = new HuffmanCode(frequencies);
+            code.save(System.out);
+        }
+        else
+        {
+            HuffmanCode code = new HuffmanCode(new Scanner(new File("huffmanTestFile.txt")));
+            code.save(System.out);
+        }
     }
     
    
