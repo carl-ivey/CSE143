@@ -32,7 +32,6 @@ public class HuffmanCode
         
         if (order.length() == 0)
         {
-            System.out.println("Instantiating");
             return new HuffmanNode(letter, 0);
         }
         
@@ -40,12 +39,10 @@ public class HuffmanCode
         
         if (next == '0')
         {
-            System.out.println("Go left!");
             cur.left = updateHuffTree(cur.left, letter, order.substring(1));
         }
         else
         {
-            System.out.println("Go right!");
             cur.right = updateHuffTree(cur.right, letter, order.substring(1));
         }
         
@@ -74,7 +71,6 @@ public class HuffmanCode
         {
             int letter = input.nextInt();
             String order = input.next();
-            System.out.printf("ADD %d @ %s\n", letter, order);
             root = updateHuffTree(root, letter, order);
         }
     }
@@ -111,48 +107,6 @@ public class HuffmanCode
     {
 
     }
-
-    public void traverse()
-    {
-        traverse(root);
-    }
-    
-    // TODO: remove this
-    public void traverse(HuffmanNode root)
-    {
-        Queue<HuffmanNode> q = new LinkedList<>();
-        Queue<Integer> lvlQ = new LinkedList<>();
-        q.add(root);
-        lvlQ.add(0);
-        
-        int prevLvl = 0;
-        while (!q.isEmpty())
-        {
-            HuffmanNode cur = q.remove();
-            int lvl = lvlQ.remove();
-            
-            if (lvl != prevLvl)
-            {
-                prevLvl = lvl;
-                System.out.println();
-            }
-            
-            System.out.printf("[%s=%d], ", cur.letter == null ? "NULL" : "" + cur.letter, cur.frequency);
-            
-            if (cur.left != null)
-            {
-                q.add(cur.left);
-                lvlQ.add(lvl + 1);
-            }
-            
-            if (cur.right != null) 
-            {
-                q.add(cur.right);
-                lvlQ.add(lvl + 1);
-            }
-        }
-    }
-    
     
     private static class HuffmanNode implements Comparable<HuffmanNode>
     {

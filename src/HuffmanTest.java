@@ -18,7 +18,6 @@ public class HuffmanTest
         frequencies[(int)'a'] = 2;
         frequencies[(int)'b'] = 2;
         HuffmanCode code = new HuffmanCode(frequencies);
-        //code.traverse();
         code.save(System.out);
         PrintStream out = new PrintStream(f);
         code.save(out);
@@ -27,13 +26,50 @@ public class HuffmanTest
         System.out.println("\n");
         
         HuffmanCode code2 = new HuffmanCode(new Scanner(new File(FILE_NAME)));
-        code2.traverse();
         code2.save(System.out);
     }
     
    
     /*
-     
+         public void traverse()
+    {
+        traverse(root);
+    }
+    
+    // TODO: remove this
+    public void traverse(HuffmanNode root)
+    {
+        Queue<HuffmanNode> q = new LinkedList<>();
+        Queue<Integer> lvlQ = new LinkedList<>();
+        q.add(root);
+        lvlQ.add(0);
+        
+        int prevLvl = 0;
+        while (!q.isEmpty())
+        {
+            HuffmanNode cur = q.remove();
+            int lvl = lvlQ.remove();
+            
+            if (lvl != prevLvl)
+            {
+                prevLvl = lvl;
+                System.out.println();
+            }
+            
+            System.out.printf("[%s=%d], ", cur.letter == null ? "NULL" : "" + cur.letter, cur.frequency);
+            
+            if (cur.left != null)
+            {
+                q.add(cur.left);
+                lvlQ.add(lvl + 1);
+            }
+            
+            if (cur.right != null) 
+            {
+                q.add(cur.right);
+                lvlQ.add(lvl + 1);
+            }
+        }
     }
      */
 }
