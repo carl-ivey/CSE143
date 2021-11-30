@@ -3,9 +3,7 @@ import java.io.*;
 
 public class HuffmanCode
 {
-    private static final int ASCII_SPC = 32;
-    private static final int ASCII_A = 97;
-    private static final int ASCII_Z = 122;
+    private static final int ASCII_MAX = 255;
     
     private HuffmanNode root;
     
@@ -13,7 +11,12 @@ public class HuffmanCode
     {
         if (pq.size() > 1)
         {
-            HuffmanNode cur = new HuffmanNode(pq.remove(), pq.remove());
+            // create merged node of similar size
+            HuffmanNode cur = new HuffmanNode();
+            cur.left = pq.remove();
+            cur.right = pq.remove();
+            cur.frequency = cur.left.frequency + cur.right.frequency;
+            
             pq.add(cur);
             return buildHuffTree(pq);
         }
@@ -52,9 +55,8 @@ public class HuffmanCode
     public HuffmanCode(int[] frequencies)
     {
         PriorityQueue<HuffmanNode> pq = new PriorityQueue<>();
-        pq.add(new HuffmanNode(ASCII_SPC, frequencies[ASCII_SPC]));
-
-        for (int i = ASCII_A; i <= ASCII_Z; i++)
+        
+        for (int i = 0; i < ASCII_MAX; i++)
         {
             if (frequencies[i] != 0)
             {
@@ -105,12 +107,24 @@ public class HuffmanCode
 
     public void translate(BitInputStream input, PrintStream output)
     {
-
+        HuffmanNode cur = root;
+        
+        while (input.hasNextBit())
+        {
+            if (isLeafNode(cur))
+            {
+                output.print((char)(int)cur.letter);
+                cur = root;
+            }
+            
+            int bit = input.nextBit();
+            cur = bit == 0 ? cur.left : cur.right;
+        }
     }
     
     private static class HuffmanNode implements Comparable<HuffmanNode>
     {
-        public Integer letter;
+        public int letter;
         public int frequency;
         public HuffmanNode left;
         public HuffmanNode right;
@@ -118,17 +132,10 @@ public class HuffmanCode
         public HuffmanNode()
         {
             // instantiate blank HuffmanNode
-            this(null, -1);
+            this(-1, -1);
         }
         
-        public HuffmanNode(HuffmanNode left, HuffmanNode right)
-        {
-            this.left = left;
-            this.right = right;
-            this.frequency = left.frequency + right.frequency;
-        }
-
-        public HuffmanNode(Integer letter, int frequency)
+        public HuffmanNode(int letter, int frequency)
         {
             this.letter = letter;
             this.frequency = frequency;

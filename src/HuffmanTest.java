@@ -11,7 +11,7 @@ public class HuffmanTest
     public static void main(String[] args) throws FileNotFoundException
     {
         File f = new File(FILE_NAME);
-        int[] frequencies = new int[1+(int)'z'];
+        int[] frequencies = new int[255];
         frequencies[(int)' '] = 1;
         frequencies[(int)'c'] = 1;
         frequencies[(int)'d'] = 1;
