@@ -1,0 +1,36 @@
+Assesement 8: HuffmanCode Reflection
+
+1) What did you learn from working on this 
+assignment?
+
+I learned about the application of binary trees 
+and priority queue algorithms to lossless
+file compression using Huffman compression.
+
+2) What did you struggle most with on this 
+assignment? How did you work to overcome 
+that struggle (even if you weren't able to)?
+
+I struggled most with ensuring my data worked
+with all data sets, and I worked to overcome this
+struggle by tracing my code and debugging it by
+printing the huffman tree structure.
+
+3) How will you use what you learned from 
+this assignment to improve your process or 
+approach on future assignments?
+
+I will methodically debug my code more using
+my IDE's debugger
+
+4) Was any part of the specification or 
+requirements unclear? If so, what part(s), 
+and how could it have been made clearer?
+
+N/A
+
+5) About how many hours did you spend working 
+on this assignment? (Estimates are fine, but 
+try to get close)
+
+around 3-4 hours
