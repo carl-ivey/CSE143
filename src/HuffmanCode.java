@@ -28,7 +28,7 @@ public class HuffmanCode
         
         if (order.length() == 0)
         {
-            return new HuffmanNode(asciiVal, 0);
+            return new HuffmanNode(asciiVal, -1);
         }
         
         char next = order.charAt(0);
@@ -104,14 +104,14 @@ public class HuffmanCode
         
         while (input.hasNextBit())
         {
+            int bit = input.nextBit();
+            cur = bit == 0 ? cur.left : cur.right;
+            
             if (isLeafNode(cur))
             {
                 output.print((char) cur.asciiVal);
                 cur = root;
             }
-            
-            int bit = input.nextBit();
-            cur = bit == 0 ? cur.left : cur.right;
         }
     }
     
