@@ -109,10 +109,11 @@ public class HuffmanCode
             
             if (isLeafNode(cur))
             {
-                output.print((char) cur.asciiVal);
+                output.write((char) cur.asciiVal);
                 cur = root;
             }
         }
+        System.out.println();
     }
     
     private static class HuffmanNode implements Comparable<HuffmanNode>
