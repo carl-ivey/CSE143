@@ -3,8 +3,6 @@ import java.io.*;
 
 public class HuffmanCode
 {
-    private static final int ASCII_MAX = 255;
-    
     private HuffmanNode root;
     
     private HuffmanNode buildHuffTree(PriorityQueue<HuffmanNode> pq)
@@ -56,7 +54,7 @@ public class HuffmanCode
     {
         PriorityQueue<HuffmanNode> pq = new PriorityQueue<>();
         
-        for (int i = 0; i < ASCII_MAX; i++)
+        for (int i = 0; i < frequencies.length; i++)
         {
             if (frequencies[i] != 0)
             {
