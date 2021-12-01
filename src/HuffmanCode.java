@@ -113,7 +113,6 @@ public class HuffmanCode
                 cur = root;
             }
         }
-        System.out.println();
     }
     
     private static class HuffmanNode implements Comparable<HuffmanNode>
