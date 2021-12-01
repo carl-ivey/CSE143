@@ -7,21 +7,16 @@ public class HuffmanCode
     
     private HuffmanNode buildHuffTree(PriorityQueue<HuffmanNode> pq)
     {
-        if (pq.size() > 1)
+        while (pq.size() > 1)
         {
-            // create merged node of similar size
             HuffmanNode cur = new HuffmanNode();
             cur.left = pq.remove();
             cur.right = pq.remove();
             cur.frequency = cur.left.frequency + cur.right.frequency;
-            
             pq.add(cur);
-            return buildHuffTree(pq);
         }
-        else
-        {
-            return pq.remove();
-        }
+        
+        return pq.remove();
     }
     
     private HuffmanNode updateHuffTree(HuffmanNode cur, int asciiVal, String order)
@@ -67,10 +62,10 @@ public class HuffmanCode
 
     public HuffmanCode(Scanner input)
     {
-        while (input.hasNext())
+        while (input.hasNextLine())
         {
-            int asciiVal = input.nextInt();
-            String order = input.next();
+            int asciiVal = Integer.parseInt(input.nextLine());
+            String order = input.nextLine();
             root = updateHuffTree(root, asciiVal, order);
         }
     }
