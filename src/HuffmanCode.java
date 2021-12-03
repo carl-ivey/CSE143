@@ -20,13 +20,21 @@ public class HuffmanCode
      * HuffmanNodes with valid frequency values.
      * 
      * @param pq,
-     *            the PriorityQueue<HuffmanNode> to build the Huffman tree from.
+     *            the Queue<HuffmanNode> to build the Huffman tree from, of
+     *            type PriorityQueue.
+     *            
+     * @throws IllegalArgumentException if pq is not of type PriorityQueue.
      * 
      * @return a HuffmanNode tree based on the frequencies of HuffmanNodes in
-     *         the given PriorityQueue<HuffmanNode>.
+     *         the given priority queue.
      */
-    private HuffmanNode buildHuffTree(PriorityQueue<HuffmanNode> pq)
+    private HuffmanNode buildHuffTree(Queue<HuffmanNode> pq)
     {
+        if (!(pq instanceof PriorityQueue))
+        {
+            throw new IllegalArgumentException("pq must be of type PriorityQueue.");
+        }
+        
         while (pq.size() > 1)
         {
             // merge nodes of similar size to parent nodes
@@ -52,7 +60,7 @@ public class HuffmanCode
      */
     public HuffmanCode(int[] frequencies)
     {
-        PriorityQueue<HuffmanNode> pq = new PriorityQueue<>();
+        Queue<HuffmanNode> pq = new PriorityQueue<>();
 
         for (int i = 0; i < frequencies.length; i++)
         {
