@@ -16,8 +16,9 @@ public class HuffmanCode
     private HuffmanNode root;
 
     /**
-     * Helper method to build a HuffmanNode tree given a PriorityQueue of
-     * HuffmanNodes with valid frequency values.
+     * Helper method to build a HuffmanNode tree given a generic Queue, 
+     * implementation type PriorityQueue, of HuffmanNodes with valid 
+     * frequency values.
      * 
      * @param pq,
      *            the Queue<HuffmanNode> to build the Huffman tree from, of
