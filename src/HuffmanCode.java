@@ -24,18 +24,11 @@ public class HuffmanCode
      *            the Queue<HuffmanNode> to build the Huffman tree from, of
      *            type PriorityQueue.
      *            
-     * @throws IllegalArgumentException if pq is not of type PriorityQueue.
-     * 
      * @return a HuffmanNode tree based on the frequencies of HuffmanNodes in
      *         the given priority queue.
      */
     private HuffmanNode buildHuffTree(Queue<HuffmanNode> pq)
     {
-        if (!(pq instanceof PriorityQueue))
-        {
-            throw new IllegalArgumentException("pq must be of type PriorityQueue.");
-        }
-        
         while (pq.size() > 1)
         {
             // merge nodes of similar size to parent nodes
