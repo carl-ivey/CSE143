@@ -154,7 +154,7 @@ public class HuffmanCode
      *            to.
      *            
      * @param path,
-     *            the location of the current node to print the leaf nodes of.
+     *            the location of the current node to print the tree contents of.
      */
     private void save(HuffmanNode cur, PrintStream output, String path)
     {
