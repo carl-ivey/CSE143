@@ -2,7 +2,7 @@
  * Name: HuffmanCode.java 
  * TA: Kashish Aggarval
  * 
- * Represents a Huffman code for a set of letters which can be
+ * Represents a Huffman tree for a set of letters which can be
  * loaded from a Scanner or an array of letter frequencies.
  * 
  * @author Victor Du
@@ -10,13 +10,14 @@
 
 import java.util.*;
 import java.io.*;
-
+ 
 public class HuffmanCode
 {
+    // the root node of the Huffman tree.
     private HuffmanNode root;
 
     /**
-     * Helper method to build a HuffmanNode tree given a generic Queue, 
+     * Helper method to build a Huffman tree given a generic Queue, 
      * implementation type PriorityQueue, of HuffmanNodes with valid 
      * frequency values.
      * 
@@ -24,7 +25,7 @@ public class HuffmanCode
      *            the Queue<HuffmanNode> to build the Huffman tree from, of
      *            type PriorityQueue.
      *            
-     * @return a HuffmanNode tree based on the frequencies of HuffmanNodes in
+     * @return a Huffman tree based on the frequencies of HuffmanNodes in
      *         the given priority queue.
      */
     private HuffmanNode buildHuffTree(Queue<HuffmanNode> pq)
@@ -43,14 +44,14 @@ public class HuffmanCode
     }
 
     /**
-     * Instantiates a HuffmanCode instance given frequencies, an array in which
+     * Constructs a Huffman tree given frequencies, an array in which
      * each index corresponds to an ASCII numeric value for a character and each
      * corresponding value corresponds to the frequency of the character which
      * the index corresponds to.
      * 
      * @param frequencies,
      *            the array which maps ASCII numeric values to their respective
-     *            counts to generate the huffman code from.
+     *            counts to generate the huffman tree from.
      */
     public HuffmanCode(int[] frequencies)
     {
@@ -68,12 +69,12 @@ public class HuffmanCode
     }
 
     /**
-     * Helper method to update the contents of a HuffmanNode tree by adding a
+     * Helper method to update the contents of a Huffman tree by adding a
      * node with a specified ASCII value and undefined frequency to a specified
      * location in the tree.
      * 
      * @param cur,
-     *            the HuffmanNode tree to add the node to.
+     *            the Huffman tree to add the node to.
      *            
      * @param asciiVal,
      *            the ASCII numeric value of the node to add to the tree.
@@ -81,7 +82,7 @@ public class HuffmanCode
      * @param order,
      *            a String representing the location of the node to add.
      *            
-     * @return the updated HuffmanNode tree with the node added.
+     * @return the updated Huffman tree with the given node added.
      */
     private HuffmanNode updateHuffTree(HuffmanNode cur, int asciiVal, String order)
     {
@@ -110,13 +111,13 @@ public class HuffmanCode
     }
 
     /**
-     * Instantiates a HuffmanCode instance from the contents of a Scanner
-     * reading pairs of two lines, where the first line is the ASCII numeric
-     * value of a character and the second line is the location of the character
-     * in the Huffman code.
+     * Constructs a Huffman tree from the contents of a Scanner
+     * reading pairs of two lines in standard format, where the first line is 
+     * the ASCII numeric value of a character and the second line is the location 
+     * of the character in the Huffman tree.
      * 
      * @param input,
-     *            the Scanner to construct the HuffmanCode instance from.
+     *            the Scanner to construct the Huffman tree from.
      */
     public HuffmanCode(Scanner input)
     {
@@ -130,7 +131,7 @@ public class HuffmanCode
     }
 
     /**
-     * Helper to return whether a given HuffmanNode is a leaf.
+     * Helper to return whether a given node is a leaf.
      * 
      * @param node,
      *            the HuffmanNode to test for being a leaf.
@@ -143,18 +144,17 @@ public class HuffmanCode
     }
 
     /**
-     * Helper method to print the contents of a HuffmanNode and its child nodes
-     * to a given PrintStream.
+     * Helper method to print the contents of the huffman tree to a given output stream.
      * 
      * @param cur,
      *            the current node to print.
      *            
      * @param output,
-     *            the PrintStream to print the contents of cur and its children
+     *            the PrintStream to print the leaf node contents of cur and its children
      *            to.
      *            
      * @param path,
-     *            the location of the current node to print.
+     *            the location of the current node to print the leaf nodes of.
      */
     private void save(HuffmanNode cur, PrintStream output, String path)
     {
@@ -174,11 +174,10 @@ public class HuffmanCode
     }
 
     /**
-     * Prints the contents of the HuffmanCode instance to a PrintStream, output.
+     * Prints the huffman tree contents to a output stream in standard format.
      * 
      * @param output,
-     *            the PrintStream to print the contents of the HuffmanCode
-     *            instance to
+     *            the PrintStream to print the contents of the huffman tree to.
      */
     public void save(PrintStream output)
     {
@@ -215,23 +214,48 @@ public class HuffmanCode
 
     private static class HuffmanNode implements Comparable<HuffmanNode>
     {
+        // The ASCII integer value of the character represented by this node
         public int asciiVal;
+        
+        // The frequency of the character represented by this node.
         public int frequency;
+        
+        // The node to the left in the tree.
         public HuffmanNode left;
+        
+        // The node to the right in the tree.
         public HuffmanNode right;
 
-        // instantiates a blank HuffmanNode with placeholder values
+        /**
+         * Instantiates a node of the tree with placeholder values for
+         * the ASCII integer value of the represented character and
+         * the frequency of the represented character.
+         */
         public HuffmanNode()
         {
             this(-1, -1);
         }
 
+        /**
+         * Instantiates a node given the ASCII integer value of the
+         * represented character and the frequency of the represented character.
+         * 
+         * @param asciiVal, 
+         *          the ASCII integer value of the represented character.
+         *          
+         * @param frequency, 
+         *          the frequency of the represented character.
+         */
         public HuffmanNode(int asciiVal, int frequency)
         {
             this.asciiVal = asciiVal;
             this.frequency = frequency;
         }
 
+        /**
+         * @return an integer value used to compare this node to another
+         *          node based on character frequency.
+         */
         public int compareTo(HuffmanNode other)
         {
             return frequency - other.frequency;
