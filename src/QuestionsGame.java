@@ -40,11 +40,6 @@ public class QuestionsGame
      */
     private QuestionNode constructTree(Scanner input)
     {
-        if (!input.hasNextLine())
-        {
-            return null;
-        }
-
         boolean isAns = input.nextLine().equals("A:");
         String data = input.nextLine();
         QuestionNode cur = new QuestionNode(data);
@@ -61,7 +56,8 @@ public class QuestionsGame
 
     /**
      * Replaces the current contents of the QuestionsGame data structure with
-     * those given by the Scanner, input.
+     * those given by the Scanner, input. Input data must be in standard,
+     * pre-order format.
      * 
      * @param input,
      *            the Scanner to construct the QuestionsGame data from.
@@ -107,7 +103,7 @@ public class QuestionsGame
 
     /**
      * Outputs the contents of the QuestionsGame' stored data to a PrintStream,
-     * output.
+     * output in pre-order, standard format.
      * 
      * @param output,
      *            the PrintStream to output the stored data to.
@@ -208,15 +204,41 @@ public class QuestionsGame
 
     private static class QuestionNode
     {
+        // the data for the question represented by the QuestionNode
         public String data;
+        
+        // the next question to ask if the answer to this question is yes.
         public QuestionNode yes;
+        
+        // the next question to ask if the answer to this question is no.
         public QuestionNode no;
 
+        /**
+         * Initializes a new QuestionNode instance given the question
+         * the QuestionNode should represent, with the yes and no child
+         * QuestionNodes set to null. 
+         * 
+         * @param data, 
+         *          the question the QuestionNode should represent.
+         */
         public QuestionNode(String data)
         {
             this(data, null, null);
         }
 
+        /**
+         * Instantiates a new QuestionNode instance given the question the
+         * QuestionNode should represent and its yes and no child nodes.
+         * 
+         * @param data, 
+         *          the question the QuestionNode should represent.
+         *          
+         * @param yes,
+         *          the next question to ask if the answer to this question is yes.
+         *          
+         * @param no,
+         *          the next question to ask if the answer to this question is no.
+         */
         public QuestionNode(String data, QuestionNode yes, QuestionNode no)
         {
             this.data = data;
